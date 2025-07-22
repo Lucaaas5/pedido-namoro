@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pedido de Namoro 💖</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, pink, lavenderblush);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    #container {
+      text-align: center;
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+    }
+
+    h1 {
+      color: darkmagenta;
+      font-size: 28px;
+      margin-bottom: 30px;
+    }
+
+    button {
+      font-size: 18px;
+      font-weight: bold;
+      padding: 15px 25px;
+      margin: 15px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    #simBtn {
+      background-color: mediumseagreen;
+      color: white;
+    }
+
+    #simBtn:hover {
+      background-color: seagreen;
+    }
+
+    #naoBtn {
+      background-color: indianred;
+      color: white;
+      position: absolute;
+    }
+
+    #gallery {
+      display: none;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 30px;
+    }
+
+    #gallery img {
+      width: 200px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      transition: transform 0.3s;
+    }
+
+    #gallery img:hover {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <h1>Você quer namorar comigo? ❤️</h1>
+    <button id="simBtn">Sim</button>
+    <button id="naoBtn">Não</button>
+
+    <!-- Galeria de fotos -->
+    <div id="gallery">
+      <img src="img/foto1.jpg" alt="Foto 1">
+      <img src="img/foto2.jpg" alt="Foto 2">
+      <img src="img/foto3.jpg" alt="Foto 3">
+    </div>
+  </div>
+
+  <audio id="bgMusic" loop>
+    <source src="careless_whisper.mp3" type="audio/mpeg" />
+    Seu navegador não suporta áudio.
+  </audio>
+
+  <script>
+    const simBtn = document.getElementById('simBtn');
+    const naoBtn = document.getElementById('naoBtn');
+    const music = document.getElementById('bgMusic');
+    const gallery = document.getElementById('gallery');
+    const container = document.getElementById('container');
+
+    // Botão "Sim" toca a música e mostra fotos
+    simBtn.addEventListener('click', () => {
+      music.play().catch((e) => {
+        console.log("Erro ao tocar música:", e);
+      });
+
+      document.body.style.background = "pink";
+      container.querySelector('h1').textContent =
+        "TE AMOO!!! Com você eu sou a pessoa mais feliz do mundo! Obrigado Laura!!";
+      simBtn.style.display = "none";
+      naoBtn.style.display = "none";
+      gallery.style.display = "flex";
+    });
+
+    // Botão "Não" foge do mouse
+    naoBtn.addEventListener('mouseenter', () => {
+      const bodyWidth = window.innerWidth - naoBtn.offsetWidth;
+      const bodyHeight = window.innerHeight - naoBtn.offsetHeight;
+
+      const randomX = Math.floor(Math.random() * bodyWidth);
+      const randomY = Math.floor(Math.random() * bodyHeight);
+
+      naoBtn.style.left = randomX + "px";
+      naoBtn.style.top = randomY + "px";
+    });
+
+    // Botão "Não" foge do toque (celular)
+    naoBtn.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+
+      const bodyWidth = window.innerWidth - naoBtn.offsetWidth;
+      const bodyHeight = window.innerHeight - naoBtn.offsetHeight;
+
+      const randomX = Math.floor(Math.random() * bodyWidth);
+      const randomY = Math.floor(Math.random() * bodyHeight);
+
+      naoBtn.style.left = randomX + "px";
+      naoBtn.style.top = randomY + "px";
+    });
+  </script>
+</body>
+</html>
